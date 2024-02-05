@@ -1,6 +1,10 @@
 #include <coroutine>
 #include <iostream>
 
+/*
+  g++ --std=c++20 coro.cc
+*/
+
 struct Awaiter {
     //  the three special methods that are called as part of a co_await
   bool await_ready() {
