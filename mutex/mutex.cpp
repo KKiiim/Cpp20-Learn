@@ -18,8 +18,8 @@ void save_page(const std::string &url) {
   std::this_thread::sleep_for(std::chrono::seconds(1));
   std::string result = "fake content";
   /*
-    guard is a stack object with lock() in constructor and a unlock in destructor.
-    stack object will dead after this function call.
+    guard is a stack object with lock() in constructor and a unlock in
+    destructor. stack object will dead after this function call.
   */
   std::lock_guard<std::mutex> guard(g_pages_mutex);
   g_pages[url] = result;

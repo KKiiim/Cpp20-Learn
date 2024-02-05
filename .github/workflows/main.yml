@@ -1,0 +1,16 @@
+name: tests
+on:
+  push:
+    branches: main
+
+jobs:
+  IO-multiplexing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: installer
+        run: 
+         sudo apt-get update -y -qq && sudo apt-get install gcc g++ libgtest-dev cmake make build-essential sed -y --no-install-recommends
+      - name: format check
+        run:
+          sudo apt install clang-format && find src -regex ".*\\.\\(cpp\\|hpp\\|c\\|h\\)" | xargs clang-format -style=file --Werror --dry-run -i 
