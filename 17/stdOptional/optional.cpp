@@ -23,3 +23,8 @@ int main() {
     std::cout << "create2(true) returned " << *str << '\n';
   }
 }
+
+/*
+create(false) returned empty
+create2(true) returned Godzilla
+*/

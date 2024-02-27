@@ -21,7 +21,7 @@ class B {
 
 template <class T, class U>
 std::unique_ptr<T> make_unique1(U&& u) {
-  return std::unique_ptr<T>(new T(std::forward<U>(u)));
+  return std::unique_ptr<T>(new T(std::forward<U>(u))); // std::forward retain the rvalue mode
 }
 
 template <class T, class... U>
@@ -45,3 +45,16 @@ int main() {
   std::cout << "make_B\n";
   [[maybe_unused]] B b = make_B(4, i, 5);
 }
+
+/*
+rvalue overload, n=2
+lvalue overload, n=1
+B
+rvalue overload, n=2
+lvalue overload, n=1
+rvalue overload, n=3
+make_B
+rvalue overload, n=4
+lvalue overload, n=1
+rvalue overload, n=5
+*/
