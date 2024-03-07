@@ -21,28 +21,31 @@ void consumeFunc(int id) {
     lck.unlock();
   }
 }
-void produceFunc() {
-  unsigned int productions = 0;
-  while (true) {
-    std::unique_lock<std::mutex> lck(g_mtx);
-    if (g_deque.empty()) {
-      g_deque.push_back(productions++);
-      g_cond.notify_all();
+
+class Produce {
+ public:
+  void static produceFunc() {
+    unsigned int productions = 0;
+    while (true) {
+      std::unique_lock<std::mutex> lck(g_mtx);
+      if (g_deque.empty()) {
+        g_deque.push_back(productions++);
+        g_cond.notify_all();
+      }
+      lck.unlock();
+      std::this_thread::sleep_for(std::chrono::seconds(1));
     }
-    lck.unlock();
-    std::this_thread::sleep_for(std::chrono::seconds(1));
   }
-}
+};
 
 int main() {
   std::thread consumeThread[10];
 
-  for (int i = 0; i < 10; ++i)
-    consumeThread[i] = std::thread(consumeFunc, i);
+  for (int i = 0; i < 10; ++i) consumeThread[i] = std::thread(consumeFunc, i);
 
   std::thread produThread;
 
-  produThread = std::thread(produceFunc);
+  produThread = std::thread(Produce::produceFunc);
 
   for (int i = 0; i < 10; ++i) {
     if (consumeThread[i].joinable()) {
