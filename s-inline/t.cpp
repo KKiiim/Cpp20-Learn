@@ -1,5 +1,3 @@
 #include "t.hpp"
 
-inline void Test::set(){
-    data_ = 1;
-}
+inline void Test::set() { data_ = 1; }

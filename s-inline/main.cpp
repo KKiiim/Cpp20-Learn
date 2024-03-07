@@ -1,8 +1,8 @@
 #include "t.hpp"
 
-int main(){
-    Test t;
-    t.set();
+int main() {
+  Test t;
+  t.set();
 }
 // error
 /**

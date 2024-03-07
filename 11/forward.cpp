@@ -21,7 +21,8 @@ class B {
 
 template <class T, class U>
 std::unique_ptr<T> make_unique1(U&& u) {
-  return std::unique_ptr<T>(new T(std::forward<U>(u))); // std::forward retain the rvalue mode
+  return std::unique_ptr<T>(
+      new T(std::forward<U>(u)));  // std::forward retain the rvalue mode
 }
 
 template <class T, class... U>

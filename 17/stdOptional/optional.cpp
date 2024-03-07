@@ -18,7 +18,8 @@ int main() {
   std::cout << "create(false) returned " << create(false).value_or("empty")
             << '\n';
 
-  // optional-returning factory functions are usable as conditions of while and if
+  // optional-returning factory functions are usable as conditions of while and
+  // if
   if (auto str = create2(true)) {
     std::cout << "create2(true) returned " << *str << '\n';
   }

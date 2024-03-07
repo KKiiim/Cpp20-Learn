@@ -6,7 +6,7 @@ class Test {
   int data_;
 
  public:
-    void set();
+  void set();
 };
 
 #endif
