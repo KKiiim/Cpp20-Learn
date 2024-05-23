@@ -1,4 +1,5 @@
 #include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -20,6 +21,20 @@ void findJobFilesPath(const std::filesystem::path &directoryPath,
     } else if (std::filesystem::is_directory(filePath)) {
       findJobFilesPath(filePath, result);
     }
+  }
+}
+
+void readFileLines(std::vector<std::string> &lines,
+                   std::string const &filePath) {
+  std::ifstream file(filePath);
+  if (file.is_open()) {
+    std::string line;
+    while (std::getline(file, line)) {
+      lines.push_back(line);
+    }
+    file.close();
+  } else {
+    std::cout << "Unable to open file: " << filePath << std::endl;
   }
 }
 
